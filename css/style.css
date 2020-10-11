@@ -1,0 +1,35 @@
+:root {
+  --imperial-red: #e63946;
+  --honeydew: #f1faee;
+  --powder-blue: #a8dadc;
+  --celadon-blue: #457b9d;
+  --prussian-blue: #1d3557;
+}
+
+
+.btn-red {
+  background-color: var(--imperial-red);
+  color: white;
+}
+
+#profile-picture {
+  width: 75px;
+  height: 75px;
+  border: white 3px solid;
+  border-radius: 5px;
+}
+
+#profile-name {
+  margin: 1rem;
+  font-size: larger;
+}
+
+.bg-dark {
+  background-color: var(--prussian-blue) !important;
+}
+
+.bg-dark > * {
+  color: white;
+}
+
+

@@ -47,11 +47,10 @@ body {
   color: white;
 }
 
-.bottom img {
-}
 
 .card-img {
   height: 300px;
   width: 200px;
   object-fit: fill;
 }
+

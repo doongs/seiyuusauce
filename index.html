@@ -23,6 +23,7 @@
     <title>Project Name</title>
   </head>
   <body>
+    
     <div class="pos-f-t">
       <!--
       <div class="collapse" id="navbarToggleExternalContent">
@@ -31,7 +32,7 @@
         </div>
       </div>
       -->
-      <nav class="navbar navbar-expand navbar-dark bg-dark d-flex">
+      <nav class="navbar navbar-expand navbar-dark bg-dark d-flex fixed-top">
         <div class="container d-flex justify-content-start">
           <a href="https://anilist.co/user/Epsev/"><img id="profile-picture" src="resources/mami.png" /></a>
           <a href="https://anilist.co/user/Epsev/"><p class="mr-4" id="profile-name">Epsev</p></a>
@@ -43,8 +44,8 @@
       </nav>
     </div>
 
-    <div class="wrapper container p-5">
-      <div class="top container row pb-3 flex justify-content-around">
+    <div class="wrapper container-fluid d-flex flex-column justify-content-between" style="padding-top: 100px;">
+      <div class="top container-fluid row pb-3 flex justify-content-around pt-3">
         <div class="card">
           <a href="https://anilist.co/staff/95185/Kana-Hanazawa"><img class="card-img" src="resources/kana.jpg"></a>
           <div class="card-body">
@@ -53,36 +54,36 @@
           </div>
         </div>
       </div>
-      <div class="bottom container row flex justify-content-around">
-        
-          <div class="card">
-            <div>
-              <a href="https://anilist.co/anime/18897/Nisekoi"><img class="card-img" src="resources/nisekoi.jpg"></a>
-              <a href="https://anilist.co/character/52723/Kosaki-Onodera"><img class="card-img" src="resources/kosaki.png"></a>
-            </div>
-            
-            <div class="card-body">
-              <a href="https://anilist.co/character/52723/Kosaki-Onodera"><h5 class="card-title">Kosaki Onodera</h5></a>
-              <a href="https://anilist.co/anime/18897/Nisekoi/"><small class="text-muted">Nisekoi: False Love</small></a>
-            </div>
+      <div class="bottom container-fluid row flex justify-content-center ">
+        <div class="card m-3">
+          <div>
+            <a href="https://anilist.co/anime/18897/Nisekoi"><img class="card-img" src="resources/nisekoi.jpg"></a>
+            <a href="https://anilist.co/character/52723/Kosaki-Onodera"><img class="card-img" src="resources/kosaki.png"></a>
           </div>
+          
+          <div class="card-body">
+            <a href="https://anilist.co/character/52723/Kosaki-Onodera"><h5 class="card-title">Kosaki Onodera</h5></a>
+            <a href="https://anilist.co/anime/18897/Nisekoi/"><small class="text-muted">Nisekoi: False Love</small></a>
+          </div>
+        </div>
 
-          <div class="card">
-            <div>
-              <a href="https://anilist.co/anime/100785/Layton-Mystery-Detective-Agency-Kats-MysterySolving-Files"><img class="card-img" src="resources/layton.jpg"></a>
-              <a href="https://anilist.co/character/124513/Katrielle-Layton"><img class="card-img" src="resources/katrielle.jpg"></a>
-              
-            </div>
+        <div class="card m-3">
+          <div>
+            <a href="https://anilist.co/anime/100785/Layton-Mystery-Detective-Agency-Kats-MysterySolving-Files"><img class="card-img" src="resources/layton.jpg"></a>
+            <a href="https://anilist.co/character/124513/Katrielle-Layton"><img class="card-img" src="resources/katrielle.jpg"></a>
             
-            <div class="card-body">
-              <a href="https://anilist.co/character/124513/Katrielle-Layton"><h5 class="card-title">Katrielle Layton</h5></a>
-              <a href="https://anilist.co/anime/100785/Layton-Mystery-Detective-Agency-Kats-MysterySolving-Files"><small class="text-muted">Layton Mystery Detective Agency: Kat's Mystery-Solving Files</small></a>
-            </div>
           </div>
-        
+          
+          <div class="card-body">
+            <a href="https://anilist.co/character/124513/Katrielle-Layton"><h5 class="card-title">Katrielle Layton</h5></a>
+            <a href="https://anilist.co/anime/100785/Layton-Mystery-Detective-Agency-Kats-MysterySolving-Files"><small class="text-muted">Layton Mystery Detective Agency: Kat's Mystery-Solving Files</small></a>
+          </div>
+        </div>
+
       </div>
       </div>
     </div>
+  
 
     <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">

@@ -14,7 +14,8 @@ body {
   background-color: whitesmoke;
 }
 
-.wrapper {
+.navbar {
+  height: 100px !important;
 }
 
 .btn-red {

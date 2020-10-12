@@ -37,8 +37,8 @@
           <a href="https://anilist.co/user/Epsev/"><p class="mr-4" id="profile-name">Epsev</p></a>
         </div>
         <div class="container d-flex justify-content-end">
-          <button class="btn btn-red mr-4">Upload Anilist</button>
-          <button class="btn btn-red mr-4">Search</button>
+          <button type="button" class="btn btn-red mr-4" data-toggle="modal" data-target="#importModal">Import Anilist</button>
+          <button type="button" class="btn btn-red mr-4" data-toggle="modal" data-target="#searchModal">Search</button>
         </div>
       </nav>
     </div>
@@ -49,6 +49,7 @@
           <a href="https://anilist.co/staff/95185/Kana-Hanazawa"><img class="card-img" src="resources/kana.jpg"></a>
           <div class="card-body">
             <a href="https://anilist.co/staff/95185/Kana-Hanazawa"><h5 class="card-title">Kana Hanazawa</h5></a>
+            <a href="https://anilist.co/staff/95185/Kana-Hanazawa"><small class="text-muted">花澤香菜</small></a>
           </div>
         </div>
       </div>
@@ -80,6 +81,56 @@
           </div>
         
       </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="importModalLabel">Import Anilist</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <input type="text" class="form-control" id="importBox" placeholder="Anilist Username">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-red" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-blue">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="searchModalLabel">Search</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <input type="text" class="form-control" id="searchBox" placeholder="Voice Actor Name">
+              <small id="searchHelp" class="form-text text-muted">Format: First Name, Last Name</small>
+              <small id="searchHelp2" class="form-text text-muted">Example: Hana Kanazawa</small>
+            </div>
+          </form>
+        </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-red" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-blue">Save changes</button>
+          </div>
+        </div>
       </div>
     </div>
 

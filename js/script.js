@@ -143,6 +143,7 @@ function userQuery(input) {
     query ($name: String) { # Define which variables will be used in the query (id)
         User(name: $name) {
           id
+          siteUrl
           name
           avatar {
             large
@@ -186,6 +187,8 @@ function userQuery(input) {
     console.log(data.data.User);
     document.querySelector(`#profile-picture`).src = data.data.User.avatar.large;
     document.querySelector(`#profile-name`).textContent = data.data.User.name;
+    document.querySelector(`#profile-picture-link`).href = data.data.User.siteUrl;
+    document.querySelector(`#profile-name-link`).href = data.data.User.siteUrl;
   }
 
   function handleError(error) {

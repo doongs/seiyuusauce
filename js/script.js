@@ -1,4 +1,6 @@
 "use strict";
+let userMedia = [];
+let intersectionUserList = [];
 function vaQuery(input) {
   var query = `
     query ($name: String) { # Define which variables will be used in the query (id)
@@ -11,8 +13,13 @@ function vaQuery(input) {
           image {
             large
           }
+          staffMedia {
+            nodes {
+              id
+            }
+          }
           siteUrl
-          characters {
+          characters(sort:FAVOURITES_DESC) {
             edges {
               id
               node {
@@ -30,6 +37,7 @@ function vaQuery(input) {
                   english
                 }
                 id
+                siteUrl
                 coverImage {
                   extraLarge
                   large
@@ -74,7 +82,50 @@ function vaQuery(input) {
 
   function handleData(data) {
     console.log(data.data.Staff);
+    document.querySelector(`#top`).innerHTML = "";
+    document.querySelector(`#bottom`).innerHTML = "";
     document.querySelector(`#top`).appendChild(createVACard(data.data.Staff));
+    //TODO implement cross referencing between VA list and userList
+    /*
+    if (userMedia != []) {
+      console.log(userMedia);
+      for(let i=0; i<userMedia.length; i++)
+      {
+        //console.log(userMedia[i].entries);
+        //intersectionUserList.push(intersection(userMedia[i].entries, data.data.Staff.staffMedia.nodes));
+        //console.log(intersectionUserList)
+      }
+    }
+    */
+   if(data.data.Staff.characters.edges[0] != undefined) {
+    document
+    .querySelector(`#bottom`)
+    .appendChild(
+      createAnimeCard(data.data.Staff, data.data.Staff.characters.edges[0])
+    );
+   }
+    
+   if(data.data.Staff.characters.edges[1] != undefined) {
+    document
+    .querySelector(`#bottom`)
+    .appendChild(
+      createAnimeCard(data.data.Staff, data.data.Staff.characters.edges[1])
+    );
+   }
+   if(data.data.Staff.characters.edges[2] != undefined) {
+    document
+    .querySelector(`#bottom`)
+    .appendChild(
+      createAnimeCard(data.data.Staff, data.data.Staff.characters.edges[2])
+    );
+   }
+   if(data.data.Staff.characters.edges[3] != undefined) {
+    document
+    .querySelector(`#bottom`)
+    .appendChild(
+      createAnimeCard(data.data.Staff, data.data.Staff.characters.edges[3])
+    );
+   }
   }
 
   // On Error
@@ -132,7 +183,64 @@ function vaQuery(input) {
     return card;
   }
 
-  (function () {})();
+  function createAnimeCard(va, character) {
+    //console.log(va.name.full);
+    //console.log(character);
+    //console.log(character.node.name.full);
+    //console.log(character.media);
+
+    let card = document.createElement("div");
+    card.classList.add("card");
+    card.classList.add("m-3");
+
+    let cardHead = document.createElement("div");
+
+    let animeAnchor = document.createElement("a");
+    animeAnchor.href = character.media[0].siteUrl;
+    let animeImage = document.createElement("img");
+    animeImage.classList.add("card-img");
+    animeImage.src = character.media[0].coverImage.large;
+
+    animeAnchor.appendChild(animeImage);
+
+    let characterAnchor = document.createElement("a");
+    characterAnchor.href = character.node.siteUrl;
+    let characterImage = document.createElement("img");
+    characterImage.classList.add("card-img");
+    characterImage.src = character.node.image.large;
+
+    characterAnchor.appendChild(characterImage);
+
+    cardHead.appendChild(animeAnchor);
+    cardHead.appendChild(characterAnchor);
+
+    let cardBody = document.createElement("div");
+    cardBody.classList.add("card-body");
+
+    let characterNameAnchor = document.createElement("a");
+    characterNameAnchor.href = character.node.siteUrl;
+    let characterName = document.createElement("h5");
+    characterName.classList.add("card-title");
+    characterName.textContent = character.node.name.full;
+
+    characterNameAnchor.appendChild(characterName);
+
+    let animeNameAnchor = document.createElement("a");
+    animeNameAnchor.href = character.media[0].siteUrl;
+    let animeName = document.createElement("small");
+    animeName.classList.add("text-muted");
+    animeName.textContent = character.media[0].title.romaji;
+
+    animeNameAnchor.appendChild(animeName);
+
+    cardBody.appendChild(characterNameAnchor);
+    cardBody.appendChild(animeNameAnchor);
+
+    card.appendChild(cardHead);
+    card.appendChild(cardBody);
+
+    return card;
+  }
 }
 
 function userQuery(input) {
@@ -147,7 +255,7 @@ function userQuery(input) {
             medium
           }
         }
-      }
+    }
   `;
 
   // Query Variables
@@ -182,12 +290,14 @@ function userQuery(input) {
   // Use the data recieved
   function handleData(data) {
     console.log(data.data.User);
+    console.log(data.data.MediaList);
     document.querySelector(`#profile-picture`).src =
       data.data.User.avatar.large;
     document.querySelector(`#profile-name`).textContent = data.data.User.name;
     document.querySelector(`#profile-picture-link`).href =
       data.data.User.siteUrl;
     document.querySelector(`#profile-name-link`).href = data.data.User.siteUrl;
+    userListQuery(data.data.User.id);
   }
 
   // On Error
@@ -195,6 +305,71 @@ function userQuery(input) {
     alert("Search failed");
     console.error(error);
   }
+}
+
+function userListQuery(input) {
+  console.log(input);
+  var query = `
+    query ($id: Int) { 
+      MediaListCollection(userId: $id, type: ANIME) {
+        lists {
+          entries {
+            id
+            media {
+              title {
+                romaji
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  // Query Variables
+  var variables = {
+    id: input,
+  };
+
+  // Api request config
+  var url = "https://graphql.anilist.co",
+    options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        query: query,
+        variables: variables,
+      }),
+    };
+
+  // Make the HTTP Api request
+  fetch(url, options).then(handleResponse).then(handleData).catch(handleError);
+
+  // Handle API response
+  function handleResponse(response) {
+    return response.json().then(function (json) {
+      return response.ok ? json : Promise.reject(json);
+    });
+  }
+
+  // Use the data recieved
+  function handleData(data) {
+    console.log(data);
+    userMedia = data.data.MediaListCollection.lists;
+  }
+
+  // On Error
+  function handleError(error) {
+    alert("Search failed");
+    console.error(error);
+  }
+}
+
+function intersection(userMediaArray, mediaArray) {
+  return userMediaArray.filter((x) => mediaArray.includes(x));
 }
 
 /*

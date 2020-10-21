@@ -202,6 +202,7 @@ function vaQuery(input) {
     animeImage.src = character.media[0].coverImage.large;
 
     animeAnchor.appendChild(animeImage);
+    animeAnchor.target = "_blank";
 
     let characterAnchor = document.createElement("a");
     characterAnchor.href = character.node.siteUrl;
@@ -210,6 +211,7 @@ function vaQuery(input) {
     characterImage.src = character.node.image.large;
 
     characterAnchor.appendChild(characterImage);
+    characterAnchor.target = "_blank";
 
     cardHead.appendChild(animeAnchor);
     cardHead.appendChild(characterAnchor);
@@ -224,6 +226,7 @@ function vaQuery(input) {
     characterName.textContent = character.node.name.full;
 
     characterNameAnchor.appendChild(characterName);
+    characterNameAnchor.target = "_blank";
 
     let animeNameAnchor = document.createElement("a");
     animeNameAnchor.href = character.media[0].siteUrl;
@@ -232,6 +235,7 @@ function vaQuery(input) {
     animeName.textContent = character.media[0].title.romaji;
 
     animeNameAnchor.appendChild(animeName);
+    animeNameAnchor.target = "_blank";
 
     cardBody.appendChild(characterNameAnchor);
     cardBody.appendChild(animeNameAnchor);

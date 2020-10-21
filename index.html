@@ -103,9 +103,22 @@
             </button>
           </div>
           <div class="modal-body">
-          <form>
+          <form id="search">
             <div class="form-group">
-              <input type="text" class="form-control" id="searchBox" placeholder="Voice Actor Name">
+              <div class="form-row p-2">
+                <input type="text" class="form-control fa" id="searchBox" placeholder="&#xF002;&nbsp;Voice Actor Name ">
+              </div>
+              <div class="form-row p-2">
+                <input type="number" class="form-control " id="numberBox" placeholder="# Shows to List (Default 4)">
+              </div>
+              <div class="form-row p-2">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="romajiCheckbox">
+                  <label class="form-check-label" for="romajiCheckbox">
+                    Romaji Names
+                </label>
+              </div>
+            </div>
               <!--
               <small id="searchHelp" class="form-text text-muted">Format: First Name, Last Name</small>
               <small id="searchHelp2" class="form-text text-muted">Example: Hana Kanazawa</small>
@@ -115,7 +128,7 @@
         </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-red" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-blue" onclick="vaQuery(document.querySelector('#searchBox').value)">Search</button>
+            <button type="submit" class="btn btn-blue" onclick="vaQuery(document.querySelector('#searchBox').value, document.querySelector('#numberBox').value, document.querySelector('#romajiCheckbox').checked); ">Search</button>
           </div>
         </div>
       </div>

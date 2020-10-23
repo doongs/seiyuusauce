@@ -121,7 +121,8 @@ function vaQuery(input, number, romaji) {
               createAnimeCard(
                 data.data.Staff,
                 data.data.Staff.characters.edges[i],
-                romaji
+                romaji,
+                true
               )
             );
           addedCharacters.push(
@@ -146,7 +147,8 @@ function vaQuery(input, number, romaji) {
               createAnimeCard(
                 data.data.Staff,
                 data.data.Staff.characters.edges[i],
-                romaji
+                romaji,
+                false
               )
             );
           addedCharacters.push(
@@ -232,11 +234,14 @@ function vaQuery(input, number, romaji) {
   }
 
   //create the card representing the anime and character
-  function createAnimeCard(va, character, romaji) {
+  function createAnimeCard(va, character, romaji, seen) {
     //create the card representing the anime and character
     let card = document.createElement("div");
     card.classList.add("card");
     card.classList.add("m-3");
+    if(seen) {
+      card.classList.add("border", "border-primary");
+    }
 
     //the card's head
     let cardHead = document.createElement("div");

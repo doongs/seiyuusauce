@@ -63,3 +63,8 @@ body {
   object-fit: fill;
 }
 
+.border-primary {
+  border-color: var(--imperial-red) !important;
+  border-width: 2px !important;
+}
+

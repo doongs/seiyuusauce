@@ -182,7 +182,7 @@ function vaQuery(input, number, romaji) {
   function createVACard(staff) {
     //the VA card
     let card = document.createElement("div");
-    card.classList.add("card", "mr-5", "ml-5");
+    card.classList.add("card", "mr-5", "ml-5", "border", "border-secondary");
 
     //the VA's picture, wrapped in a link
     let vaImageAnchor = document.createElement("a");
@@ -240,9 +240,9 @@ function vaQuery(input, number, romaji) {
     card.classList.add("card");
     card.classList.add("m-3");
     if(seen) {
-      card.classList.add("border", "border-primary");
-    } else {
       card.classList.add("border", "border-secondary");
+    } else {
+      card.classList.add("border", "border-primary");
     }
 
     //the card's head

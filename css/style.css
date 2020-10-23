@@ -68,3 +68,8 @@ body {
   border-width: 2px !important;
 }
 
+.border-secondary {
+  border-color: var(--prussian-blue) !important;
+  border-width: 2px !important;
+}
+

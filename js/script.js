@@ -241,6 +241,8 @@ function vaQuery(input, number, romaji) {
     card.classList.add("m-3");
     if(seen) {
       card.classList.add("border", "border-primary");
+    } else {
+      card.classList.add("border", "border-secondary");
     }
 
     //the card's head

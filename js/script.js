@@ -1,5 +1,6 @@
 "use strict";
-let userMedia = [];
+let userCharacters = [];
+let staffCharacters = [];
 let intersectionUserList = [];
 function vaQuery(input, number, romaji) {
   var query = `
@@ -12,17 +13,12 @@ function vaQuery(input, number, romaji) {
           }
           image {
             large
-          }
-          staffMedia {
-            nodes {
-              id
-            }
-          }
+          }    
           siteUrl
           characters(sort:FAVOURITES_DESC) {
             edges {
-              id
               node {
+                id
                 name{
                   full
                 }
@@ -81,46 +77,85 @@ function vaQuery(input, number, romaji) {
   }
 
   function handleData(data) {
-    console.log(data.data.Staff);
+    compileStaffMedia(data.data.Staff);
 
     //reset the page
     document.querySelector(`#top`).innerHTML = "";
     document.querySelector(`#bottom`).innerHTML = "";
-  
+
     //add the VA card based on the query
     document.querySelector(`#top`).appendChild(createVACard(data.data.Staff));
     //TODO implement cross referencing between VA list and userList
-    /*
-    if (userMedia != []) {
-      console.log(userMedia);
-      for(let i=0; i<userMedia.length; i++)
-      {
-        //console.log(userMedia[i].entries);
-        //intersectionUserList.push(intersection(userMedia[i].entries, data.data.Staff.staffMedia.nodes));
-        //console.log(intersectionUserList)
+
+    if (userCharacters.length != 0) {
+      intersectionUserList = [];
+      for (let i = 0; i < staffCharacters.length; i++) {
+        if (userCharacters.includes(staffCharacters[i])) {
+          intersectionUserList.push(staffCharacters[i]);
+        }
       }
     }
-    */
+
     //if not imported, add ${number} anime cards to the bottom based on character popularity
     //the if checks to make sure the VA has the given number of roles
     //edges[3] == undefined means that the va only has 2 roles
-    if(number == 0)
-    {
+    if (number == 0) {
       number = 4;
     }
-    for (let i = 0; i < number; i++) {
-      if (data.data.Staff.characters.edges[i] != undefined) {
-        document
-          .querySelector(`#bottom`)
-          .appendChild(
-            createAnimeCard(
-              data.data.Staff,
-              data.data.Staff.characters.edges[i],
-              romaji
-            )
+    //array for tracking how many and which characters have been added so far
+    let addedCharacters = [];
+    //loop through the staff character list, adding any that are intersected
+    for (let i = 0; i < data.data.Staff.characters.edges.length; i++) {
+      if (
+        data.data.Staff.characters.edges[i] != undefined &&
+        addedCharacters.length < number
+      ) {
+        if (
+          intersectionUserList.includes(
+            data.data.Staff.characters.edges[i].node.name.full
+          )
+        ) {
+          document
+            .querySelector(`#bottom`)
+            .appendChild(
+              createAnimeCard(
+                data.data.Staff,
+                data.data.Staff.characters.edges[i],
+                romaji
+              )
+            );
+          addedCharacters.push(
+            data.data.Staff.characters.edges[i].node.name.full
           );
+        }
       }
     }
+    for (let i = 0; i < data.data.Staff.characters.edges.length; i++) {
+      if (
+        data.data.Staff.characters.edges[i] != undefined &&
+        addedCharacters.length < number
+      ) {
+        if (
+          !addedCharacters.includes(
+            data.data.Staff.characters.edges[i].node.name.full
+          )
+        ) {
+          document
+            .querySelector(`#bottom`)
+            .appendChild(
+              createAnimeCard(
+                data.data.Staff,
+                data.data.Staff.characters.edges[i],
+                romaji
+              )
+            );
+          addedCharacters.push(
+            data.data.Staff.characters.edges[i].node.name.full
+          );
+        }
+      }
+    }
+    addedCharacters = [];
     //close the modal window and reset the form
     document.querySelector(`#search`).reset();
     $("#searchModal").modal("hide");
@@ -130,6 +165,15 @@ function vaQuery(input, number, romaji) {
   function handleError(error) {
     alert("VA search failed, please check your spelling");
     console.error(error);
+  }
+
+  //add all the characters from this VA to the global staffChracters[]
+  function compileStaffMedia(staff) {
+    //empty the array
+    staffCharacters = [];
+    for (let i = 0; i < staff.characters.edges.length; i++) {
+      staffCharacters.push(staff.characters.edges[i].node.name.full);
+    }
   }
 
   //create the VA Card HTML
@@ -172,7 +216,6 @@ function vaQuery(input, number, romaji) {
     let vaNameNativeText = document.createElement("small");
     vaNameNativeText.classList.add("text-muted");
     vaNameNativeText.textContent = staff.name.native;
-    console.log(staff.name.native);
 
     //add the VA's kanji name to the link
     vaNameNativeAnchor.appendChild(vaNameNativeText);
@@ -190,11 +233,6 @@ function vaQuery(input, number, romaji) {
 
   //create the card representing the anime and character
   function createAnimeCard(va, character, romaji) {
-    //console.log(va.name.full);
-    //console.log(character);
-    //console.log(character.node.name.full);
-    //console.log(character.media);
-
     //create the card representing the anime and character
     let card = document.createElement("div");
     card.classList.add("card");
@@ -250,15 +288,13 @@ function vaQuery(input, number, romaji) {
     animeNameAnchor.target = "_blank";
     let animeName = document.createElement("small");
     animeName.classList.add("text-muted");
-    
+
     //if the english title exists and romaji not selected
-    if(character.media[0].title.english != undefined && !romaji) 
-    {
+    if (character.media[0].title.english != undefined && !romaji) {
       animeName.textContent = character.media[0].title.english;
-    } else{
+    } else {
       animeName.textContent = character.media[0].title.romaji;
     }
-    
 
     //add the anime's name to the link
     animeNameAnchor.appendChild(animeName);
@@ -323,14 +359,17 @@ function userQuery(input) {
   function handleData(data) {
     //close the import modal window
     $("#importModal").modal("hide");
-    console.log(data.data.User);
-    console.log(data.data.MediaList);
+    //set the user avatar
     document.querySelector(`#profile-picture`).src =
       data.data.User.avatar.large;
+    //set the profile name
     document.querySelector(`#profile-name`).textContent = data.data.User.name;
+    //set the picture link
     document.querySelector(`#profile-picture-link`).href =
       data.data.User.siteUrl;
+    //set the name link
     document.querySelector(`#profile-name-link`).href = data.data.User.siteUrl;
+    //query for the user's anime list
     userListQuery(data.data.User.id);
   }
 
@@ -343,16 +382,28 @@ function userQuery(input) {
 
 function userListQuery(input) {
   var query = `
-    query ($id: Int) { 
-      MediaListCollection(userId: $id, type: ANIME) {
-        lists {
-          entries {
+  query ($id: Int) { 
+    MediaListCollection(userId: $id, type: ANIME) {
+      lists {
+        name
+        entries {
+          media {
             id
-            media {
-              title {
-                romaji
+            title {
+              english
+              romaji
+            }
+            characters(sort:FAVOURITES_DESC) {
+              edges {
+                node {
+                  id
+                  name{
+                    full
+                  }
+                }
               }
             }
+          }
           }
         }
       }
@@ -390,8 +441,23 @@ function userListQuery(input) {
 
   // Use the data recieved
   function handleData(data) {
-    console.log(data);
-    userMedia = data.data.MediaListCollection.lists;
+    compileUserMedia(data);
+  }
+
+  //add all the characters from the user's show list into the userCharacters array
+  function compileUserMedia(data) {
+    //reset the array
+    userCharacters = [];
+    let list = [];
+    for (let i = 0; i < data.data.MediaListCollection.lists.length; i++) {
+      list = list.concat(data.data.MediaListCollection.lists[i].entries);
+    }
+    //let list = data.data.MediaListCollection.lists[2];
+    for (let i = 0; i < list.length; i++) {
+      for (let j = 0; j < list[i].media.characters.edges.length; j++) {
+        userCharacters.push(list[i].media.characters.edges[j].node.name.full);
+      }
+    }
   }
 
   // On Error
@@ -402,9 +468,6 @@ function userListQuery(input) {
 }
 
 //returns the list of anime that is on the user's list and on the VA's list
-function intersection(userMediaArray, mediaArray) {
-  return userMediaArray.filter((x) => mediaArray.includes(x));
-}
 
 /*
 

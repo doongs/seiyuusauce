@@ -2,6 +2,75 @@
 let userCharacters = [];
 let staffCharacters = [];
 let intersectionUserList = [];
+function characterQuery(input, number, romaji) {
+  var query = `
+  query ($search: String) {
+    Character(search: $search) {
+      name {
+        full
+      }
+      media(type:ANIME, sort:POPULARITY_DESC) {
+        edges {
+          node {
+            title{
+              romaji
+            }
+          }
+          voiceActors(language: JAPANESE, sort:FAVOURITES_DESC) {
+            name {
+              full
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  `;
+
+  // Query Variables
+  var variables = {
+    search: input,
+  };
+
+  // Api request config
+  var url = "https://graphql.anilist.co",
+    options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        query: query,
+        variables: variables,
+      }),
+    };
+
+  // Make the HTTP Api request
+  fetch(url, options).then(handleResponse).then(handleData).catch(handleError);
+
+  // Use the data recieved
+  function handleResponse(response) {
+    return response.json().then(function (json) {
+      return response.ok ? json : Promise.reject(json);
+    });
+  }
+
+  //send a VA query using the voice actor name found
+  function handleData(data) {
+    vaQuery(
+      data.data.Character.media.edges[0].voiceActors[0].name.full,
+      number,
+      romaji
+    );
+  }
+
+  //if the user searches for a VA instead of character, 404 error will be thrown
+  function handleError(error) {
+    vaQuery(input, number, romaji);
+  }
+}
 function vaQuery(input, number, romaji) {
   var query = `
     query ($name: String) { # Define which variables will be used in the query (id)
@@ -87,11 +156,14 @@ function vaQuery(input, number, romaji) {
     document.querySelector(`#top`).appendChild(createVACard(data.data.Staff));
     //TODO implement cross referencing between VA list and userList
 
+    //cross reference the user list and va list
     if (userCharacters.length != 0) {
       intersectionUserList = [];
       for (let i = 0; i < staffCharacters.length; i++) {
-        if (userCharacters.includes(staffCharacters[i])) {
-          intersectionUserList.push(staffCharacters[i]);
+        //need to check against ID to prevent false flagging characters with the same name
+        if (userCharacters.includes(staffCharacters[i][0])) {
+          //push the chracter's name
+          intersectionUserList.push(staffCharacters[i][1]);
         }
       }
     }
@@ -165,7 +237,7 @@ function vaQuery(input, number, romaji) {
 
   // On Error
   function handleError(error) {
-    alert("VA search failed, please check your spelling");
+    alert("Search failed, please check your spelling!");
     console.error(error);
   }
 
@@ -174,7 +246,7 @@ function vaQuery(input, number, romaji) {
     //empty the array
     staffCharacters = [];
     for (let i = 0; i < staff.characters.edges.length; i++) {
-      staffCharacters.push(staff.characters.edges[i].node.name.full);
+      staffCharacters.push([staff.characters.edges[i].node.id, staff.characters.edges[i].node.name.full]);
     }
   }
 
@@ -239,7 +311,7 @@ function vaQuery(input, number, romaji) {
     let card = document.createElement("div");
     card.classList.add("card");
     card.classList.add("m-3");
-    if(seen) {
+    if (seen) {
       card.classList.add("border", "border-secondary");
     } else {
       card.classList.add("border", "border-primary");
@@ -462,7 +534,7 @@ function userListQuery(input) {
     //let list = data.data.MediaListCollection.lists[2];
     for (let i = 0; i < list.length; i++) {
       for (let j = 0; j < list[i].media.characters.edges.length; j++) {
-        userCharacters.push(list[i].media.characters.edges[j].node.name.full);
+        userCharacters.push(list[i].media.characters.edges[j].node.id);
       }
     }
   }

@@ -2,7 +2,6 @@
 let userCharacters = [];
 let staffCharacters = [];
 let intersectionUserList = [];
-let login = false;
 function characterQuery(input, number, romaji) {
   var query = `
   query ($search: String) {
@@ -247,10 +246,7 @@ function vaQuery(input, number, romaji) {
     //empty the array
     staffCharacters = [];
     for (let i = 0; i < staff.characters.edges.length; i++) {
-      staffCharacters.push([
-        staff.characters.edges[i].node.id,
-        staff.characters.edges[i].node.name.full,
-      ]);
+      staffCharacters.push([staff.characters.edges[i].node.id, staff.characters.edges[i].node.name.full]);
     }
   }
 
@@ -315,6 +311,11 @@ function vaQuery(input, number, romaji) {
     let card = document.createElement("div");
     card.classList.add("card");
     card.classList.add("m-3");
+    if (seen) {
+      card.classList.add("border", "border-secondary");
+    } else {
+      card.classList.add("border", "border-primary");
+    }
 
     //the card's head
     let cardHead = document.createElement("div");
@@ -384,67 +385,6 @@ function vaQuery(input, number, romaji) {
     //add the head and body to the card
     card.appendChild(cardHead);
     card.appendChild(cardBody);
-
-    if (seen) {
-      card.classList.add("border", "border-secondary");
-    } else {
-      card.classList.add("border", "border-primary", "unseen");
-      /*
-      Array.from(card.children).forEach((child, index) => {
-        child.addEventListener(
-          "dragstart",
-          function (event) {
-            //$("#addModal").modal('show');
-            card.classList.add("dragging");
-            //event.dataTransfer.setData("text/plain", animeName.textContent);
-            //console.log(event.data.getData("text/plain"));
-          },
-          false
-        );
-        child.addEventListener(
-          "dragend",
-          function (event) {
-            card.classList.remove("dragging");
-          },
-          false
-        );
-        child.addEventListener(
-          "drag",
-          function (event) {
-            console.log("drag");
-          },
-          false
-        );
-      });
-      */
-      card.addEventListener(
-        "mousedown",
-        function (event) {
-          //$("#addModal").modal('show');
-          //event.preventDefault();
-          //event.data.setData("text", event.target.id);
-          setTimeout(function () {
-            event.preventDefault();
-          }, 100);
-          $(card).fadeOut(1000, function () {
-            $("#addModal").modal("show");
-            document.querySelector(`.add-button`).id = animeName.textContent;
-          });
-
-          //event.dataTransfer.setData("text/plain", animeName.textContent);
-          //console.log(event.data.getData("text/plain"));
-        },
-        true
-      );
-      card.addEventListener(
-        "mouseup",
-        function (event) {
-          //event.preventDefault();
-          card.classList.remove("holding");
-        },
-        true
-      );
-    }
 
     return card;
   }
@@ -606,30 +546,18 @@ function userListQuery(input) {
   }
 }
 
-function loginRequest(name) {
-  var accessToken = window.location.hash.substr(1);
-  var url = "https://graphql.anilist.co",
-    options = {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + accessToken,
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        //query: query,
-      }),
-    };
+//returns the list of anime that is on the user's list and on the VA's list
 
-  fetch(url, options).then(handleResponse, handleError);
+/*
 
-  function handleResponse(response) {
-    console.log(response);
-  }
+Example of VA Card (goes in #top):
 
-  function handleError(error) {
-    window.location.replace(
-      "https://anilist.co/api/v2/oauth/authorize?client_id=4246&response_type=token"
-    );
-  }
-}
+<div class="card">
+    <a href="https://anilist.co/staff/95185/Kana-Hanazawa"><img class="card-img" id="KanaHanazawa" src="resources/kana.jpg"></a>
+    <div class="card-body">
+    <a href="https://anilist.co/staff/95185/Kana-Hanazawa"><h5 class="card-title">Kana Hanazawa</h5></a>
+    <small class="text-muted">花澤香菜</small>
+    </div>
+</div>
+
+*/

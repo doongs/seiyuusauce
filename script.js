@@ -607,6 +607,7 @@ function userListQuery(input) {
 }
 
 function loginRequest(name) {
+  var accessToken = window.location.hash.substr(1);
   var url = "https://graphql.anilist.co",
     options = {
       method: "POST",
@@ -616,7 +617,7 @@ function loginRequest(name) {
         Accept: "application/json",
       },
       body: JSON.stringify({
-        query: query,
+        //query: query,
       }),
     };
 

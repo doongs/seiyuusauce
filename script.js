@@ -581,42 +581,6 @@ function userListQuery(input) {
   // Use the data recieved
   function handleData(data) {
     compileUserMedia(data);
-    document.querySelector(`#profile-picture`).addEventListener(
-      "drop",
-      function (event) {
-        event.preventDefault();
-        console.log(event.dataTransfer.getData("text"));
-      },
-      false
-    );
-    document.querySelector(`#profile`).addEventListener(
-      "dragenter",
-      function (event) {
-        event.preventDefault();
-      },
-      false
-    );
-    document.querySelector(`#profile`).addEventListener(
-      "dragenter",
-      function (event) {
-        event.preventDefault();
-        document.querySelector(`#profile`).classList.add("dragging");
-        document.querySelector(`#profile-picture`).classList.add("dragging");
-        document.querySelector(`#profile-name`).classList.add("dragging");
-      },
-      false
-    );
-
-    document.querySelector(`#profile`).addEventListener(
-      "dragleave",
-      function (event) {
-        event.preventDefault();
-        document.querySelector(`#profile`).classList.remove("dragging");
-        document.querySelector(`#profile-picture`).classList.remove("dragging");
-        document.querySelector(`#profile-name`).classList.remove("dragging");
-      },
-      false
-    );
   }
 
   //add all the characters from the user's show list into the userCharacters array
@@ -642,10 +606,29 @@ function userListQuery(input) {
   }
 }
 
-function addShow(name) {
-  if (login) {
-    console.log(name);
-  } else {
-    window.location.replace("https://anilist.co/api/v2/oauth/authorize?client_id=4246&response_type=token");
+function loginRequest(name) {
+  var url = "https://graphql.anilist.co",
+    options = {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + accessToken,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        query: query,
+      }),
+    };
+
+  fetch(url, options).then(handleResponse, handleError);
+
+  function handleResponse(response) {
+    console.log(response);
+  }
+
+  function handleError(error) {
+    window.location.replace(
+      "https://anilist.co/api/v2/oauth/authorize?client_id=4246&response_type=token"
+    );
   }
 }

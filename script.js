@@ -2,6 +2,7 @@
 let userCharacters = [];
 let staffCharacters = [];
 let intersectionUserList = [];
+let login = false;
 function characterQuery(input, number, romaji) {
   var query = `
   query ($search: String) {
@@ -246,7 +247,10 @@ function vaQuery(input, number, romaji) {
     //empty the array
     staffCharacters = [];
     for (let i = 0; i < staff.characters.edges.length; i++) {
-      staffCharacters.push([staff.characters.edges[i].node.id, staff.characters.edges[i].node.name.full]);
+      staffCharacters.push([
+        staff.characters.edges[i].node.id,
+        staff.characters.edges[i].node.name.full,
+      ]);
     }
   }
 
@@ -311,11 +315,6 @@ function vaQuery(input, number, romaji) {
     let card = document.createElement("div");
     card.classList.add("card");
     card.classList.add("m-3");
-    if (seen) {
-      card.classList.add("border", "border-secondary");
-    } else {
-      card.classList.add("border", "border-primary");
-    }
 
     //the card's head
     let cardHead = document.createElement("div");
@@ -385,6 +384,67 @@ function vaQuery(input, number, romaji) {
     //add the head and body to the card
     card.appendChild(cardHead);
     card.appendChild(cardBody);
+
+    if (seen) {
+      card.classList.add("border", "border-secondary");
+    } else {
+      card.classList.add("border", "border-primary", "unseen");
+      /*
+      Array.from(card.children).forEach((child, index) => {
+        child.addEventListener(
+          "dragstart",
+          function (event) {
+            //$("#addModal").modal('show');
+            card.classList.add("dragging");
+            //event.dataTransfer.setData("text/plain", animeName.textContent);
+            //console.log(event.data.getData("text/plain"));
+          },
+          false
+        );
+        child.addEventListener(
+          "dragend",
+          function (event) {
+            card.classList.remove("dragging");
+          },
+          false
+        );
+        child.addEventListener(
+          "drag",
+          function (event) {
+            console.log("drag");
+          },
+          false
+        );
+      });
+      */
+      card.addEventListener(
+        "mousedown",
+        function (event) {
+          //$("#addModal").modal('show');
+          //event.preventDefault();
+          //event.data.setData("text", event.target.id);
+          setTimeout(function () {
+            event.preventDefault();
+          }, 100);
+          $(card).fadeOut(1000, function () {
+            $("#addModal").modal("show");
+            document.querySelector(`.add-button`).id = animeName.textContent;
+          });
+
+          //event.dataTransfer.setData("text/plain", animeName.textContent);
+          //console.log(event.data.getData("text/plain"));
+        },
+        true
+      );
+      card.addEventListener(
+        "mouseup",
+        function (event) {
+          //event.preventDefault();
+          card.classList.remove("holding");
+        },
+        true
+      );
+    }
 
     return card;
   }
@@ -521,6 +581,42 @@ function userListQuery(input) {
   // Use the data recieved
   function handleData(data) {
     compileUserMedia(data);
+    document.querySelector(`#profile-picture`).addEventListener(
+      "drop",
+      function (event) {
+        event.preventDefault();
+        console.log(event.dataTransfer.getData("text"));
+      },
+      false
+    );
+    document.querySelector(`#profile`).addEventListener(
+      "dragenter",
+      function (event) {
+        event.preventDefault();
+      },
+      false
+    );
+    document.querySelector(`#profile`).addEventListener(
+      "dragenter",
+      function (event) {
+        event.preventDefault();
+        document.querySelector(`#profile`).classList.add("dragging");
+        document.querySelector(`#profile-picture`).classList.add("dragging");
+        document.querySelector(`#profile-name`).classList.add("dragging");
+      },
+      false
+    );
+
+    document.querySelector(`#profile`).addEventListener(
+      "dragleave",
+      function (event) {
+        event.preventDefault();
+        document.querySelector(`#profile`).classList.remove("dragging");
+        document.querySelector(`#profile-picture`).classList.remove("dragging");
+        document.querySelector(`#profile-name`).classList.remove("dragging");
+      },
+      false
+    );
   }
 
   //add all the characters from the user's show list into the userCharacters array
@@ -546,18 +642,10 @@ function userListQuery(input) {
   }
 }
 
-//returns the list of anime that is on the user's list and on the VA's list
-
-/*
-
-Example of VA Card (goes in #top):
-
-<div class="card">
-    <a href="https://anilist.co/staff/95185/Kana-Hanazawa"><img class="card-img" id="KanaHanazawa" src="resources/kana.jpg"></a>
-    <div class="card-body">
-    <a href="https://anilist.co/staff/95185/Kana-Hanazawa"><h5 class="card-title">Kana Hanazawa</h5></a>
-    <small class="text-muted">花澤香菜</small>
-    </div>
-</div>
-
-*/
+function addShow(name) {
+  if (login) {
+    console.log(name);
+  } else {
+    window.location.replace("https://anilist.co/api/v2/oauth/authorize?client_id=4246&response_type=token");
+  }
+}

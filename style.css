@@ -5,6 +5,7 @@
   --powder-blue: #a8dadc;
   --celadon-blue: #457b9d;
   --prussian-blue: #1d3557;
+  --slate: #121f1f;
 }
 
 html > * {
@@ -17,6 +18,10 @@ a {
 
 body {
   background-color: whitesmoke;
+}
+
+.body-dark {
+  background-color: var(--slate);
 }
 
 .navbar {

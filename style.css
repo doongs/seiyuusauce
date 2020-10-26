@@ -5,15 +5,12 @@
   --powder-blue: #a8dadc;
   --celadon-blue: #457b9d;
   --prussian-blue: #1d3557;
-  
 }
 
 html > * {
-  font-family: 'IBM Plex Sans';
+  font-family: "IBM Plex Sans";
 }
-#searchBox {
-  font-family: FontAwesome,'IBM Plex Sans';
-}
+
 a {
   color: unset;
 }
@@ -36,31 +33,12 @@ body {
   color: white;
 }
 
-#profile-picture {
-  width: 75px;
-  height: 75px;
-  border: white 3px solid;
-  border-radius: 5px;
-}
-
-#profile-name {
-  margin: 1rem;
-  font-size: larger;
-}
-
 .bg-dark {
   background-color: var(--prussian-blue) !important;
 }
 
 .bg-dark > * {
   color: white;
-}
-
-
-.card-img {
-  height: 300px;
-  width: 200px;
-  object-fit: fill;
 }
 
 .border-primary {
@@ -73,7 +51,28 @@ body {
   border-width: 2px !important;
 }
 
+.card-img {
+  height: 300px;
+  width: 200px;
+  object-fit: fill;
+}
+
 .card-body {
   max-width: 400px;
 }
 
+#searchBox {
+  font-family: FontAwesome, "IBM Plex Sans";
+}
+
+#profile-picture {
+  width: 75px;
+  height: 75px;
+  border: white 3px solid;
+  border-radius: 5px;
+}
+
+#profile-name {
+  margin: 1rem;
+  font-size: larger;
+}

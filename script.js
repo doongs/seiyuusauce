@@ -2,6 +2,7 @@
 let userCharacters = [];
 let staffCharacters = [];
 let intersectionUserList = [];
+let login = false;
 function characterQuery(input, number, romaji) {
   var query = `
   query ($search: String) {
@@ -25,7 +26,6 @@ function characterQuery(input, number, romaji) {
       }
     }
   }
-  
   `;
 
   // Query Variables
@@ -154,7 +154,6 @@ function vaQuery(input, number, romaji) {
 
     //add the VA card based on the query
     document.querySelector(`#top`).appendChild(createVACard(data.data.Staff));
-    //TODO implement cross referencing between VA list and userList
 
     //cross reference the user list and va list
     if (userCharacters.length != 0) {
@@ -246,7 +245,10 @@ function vaQuery(input, number, romaji) {
     //empty the array
     staffCharacters = [];
     for (let i = 0; i < staff.characters.edges.length; i++) {
-      staffCharacters.push([staff.characters.edges[i].node.id, staff.characters.edges[i].node.name.full]);
+      staffCharacters.push([
+        staff.characters.edges[i].node.id,
+        staff.characters.edges[i].node.name.full,
+      ]);
     }
   }
 
@@ -311,11 +313,6 @@ function vaQuery(input, number, romaji) {
     let card = document.createElement("div");
     card.classList.add("card");
     card.classList.add("m-3");
-    if (seen) {
-      card.classList.add("border", "border-secondary");
-    } else {
-      card.classList.add("border", "border-primary");
-    }
 
     //the card's head
     let cardHead = document.createElement("div");
@@ -386,6 +383,11 @@ function vaQuery(input, number, romaji) {
     card.appendChild(cardHead);
     card.appendChild(cardBody);
 
+    if (seen) {
+      card.classList.add("border", "border-secondary");
+    } else {
+      card.classList.add("border", "border-primary", "unseen");
+    }
     return card;
   }
 }
@@ -546,18 +548,4 @@ function userListQuery(input) {
   }
 }
 
-//returns the list of anime that is on the user's list and on the VA's list
 
-/*
-
-Example of VA Card (goes in #top):
-
-<div class="card">
-    <a href="https://anilist.co/staff/95185/Kana-Hanazawa"><img class="card-img" id="KanaHanazawa" src="resources/kana.jpg"></a>
-    <div class="card-body">
-    <a href="https://anilist.co/staff/95185/Kana-Hanazawa"><h5 class="card-title">Kana Hanazawa</h5></a>
-    <small class="text-muted">花澤香菜</small>
-    </div>
-</div>
-
-*/

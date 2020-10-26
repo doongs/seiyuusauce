@@ -158,14 +158,18 @@ function vaQuery(input, number, romaji) {
     //cross reference the user list and va list
     if (userCharacters.length != 0) {
       intersectionUserList = [];
+      console.log(userCharacters);
+      console.log(staffCharacters);
       for (let i = 0; i < staffCharacters.length; i++) {
-        //need to check against ID to prevent false flagging characters with the same name
-        if (userCharacters.includes(staffCharacters[i][0])) {
+        //need to check against ID to prevent false flagging characters with the same name (36309 is the general Narrator id)
+        if (userCharacters.includes(staffCharacters[i][0]) && staffCharacters[i][0] != 36309) {
           //push the chracter's name
           intersectionUserList.push(staffCharacters[i][1]);
         }
       }
     }
+
+    
 
     //if not imported, add ${number} anime cards to the bottom based on character popularity
     //the if checks to make sure the VA has the given number of roles

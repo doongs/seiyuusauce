@@ -146,9 +146,9 @@ function vaQuery(input, number, romaji) {
   }
 
   function handleData(data) {
-    localStorage.setItem('va', input);
-    localStorage.setItem('number', number);
-    localStorage.setItem('romaji', romaji);
+    localStorage.setItem("va", input);
+    localStorage.setItem("number", number);
+    localStorage.setItem("romaji", romaji);
     compileStaffMedia(data.data.Staff);
 
     //reset the page
@@ -447,7 +447,7 @@ function userQuery(input) {
 
   // Use the data recieved
   function handleData(data) {
-    localStorage.setItem('username', input);
+    localStorage.setItem("username", input);
     //close the import modal window
     $("#importModal").modal("hide");
     //set the user avatar
@@ -556,15 +556,17 @@ function userListQuery(input) {
     alert("Search failed");
     console.error(error);
   }
-
-  
 }
 
-(function(){
-  if (!(localStorage.getItem('username') === null)) {
-    userQuery(localStorage.getItem('username'));
-  } 
-  if (!(localStorage.getItem('va') === null)) {
-    vaQuery(localStorage.getItem('va'), localStorage.getItem('number'), localStorage.getItem('romaji'));
-  } 
+(function () {
+  if (!(localStorage.getItem("username") === null)) {
+    userQuery(localStorage.getItem("username"));
+  }
+  if (!(localStorage.getItem("va") === null)) {
+    vaQuery(
+      localStorage.getItem("va"),
+      localStorage.getItem("number"),
+      localStorage.getItem("romaji")
+    );
+  }
 })();

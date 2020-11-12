@@ -146,6 +146,9 @@ function vaQuery(input, number, romaji) {
   }
 
   function handleData(data) {
+    localStorage.setItem('va', input);
+    localStorage.setItem('number', number);
+    localStorage.setItem('romaji', romaji);
     compileStaffMedia(data.data.Staff);
 
     //reset the page
@@ -558,7 +561,10 @@ function userListQuery(input) {
 }
 
 (function(){
-  if (!(localStorage.getItem("username") === null)) {
-    userQuery(localStorage.getItem("username"));
+  if (!(localStorage.getItem('username') === null)) {
+    userQuery(localStorage.getItem('username'));
+  } 
+  if (!(localStorage.getItem('va') === null)) {
+    vaQuery(localStorage.getItem('va'), localStorage.getItem('number'), localStorage.getItem('romaji'));
   } 
 })();

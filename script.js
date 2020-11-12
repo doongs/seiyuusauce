@@ -160,6 +160,7 @@ function vaQuery(input, number, romaji) {
       intersectionUserList = [];
       console.log(userCharacters);
       console.log(staffCharacters);
+      console.log(staffCharacters.includes(1125));
       for (let i = 0; i < staffCharacters.length; i++) {
         //need to check against ID to prevent false flagging characters with the same name (36309 is the general Narrator id)
         if (
@@ -443,6 +444,7 @@ function userQuery(input) {
 
   // Use the data recieved
   function handleData(data) {
+    localStorage.setItem('username', input);
     //close the import modal window
     $("#importModal").modal("hide");
     //set the user avatar
@@ -551,4 +553,12 @@ function userListQuery(input) {
     alert("Search failed");
     console.error(error);
   }
+
+  
 }
+
+(function(){
+  if (!(localStorage.getItem("username") === null)) {
+    userQuery(localStorage.getItem("username"));
+  } 
+})();

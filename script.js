@@ -558,6 +558,11 @@ function userListQuery(input) {
   }
 }
 
+function reset() {
+  localStorage.clear();
+  window.location.reload();
+}
+
 (function () {
   if (!(localStorage.getItem("username") === null)) {
     userQuery(localStorage.getItem("username"));

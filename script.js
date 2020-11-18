@@ -266,6 +266,7 @@ function vaQuery(input, number, romaji) {
     //the VA card
     let card = document.createElement("div");
     card.classList.add("card", "mr-5", "ml-5", "border", "border-secondary");
+    card.setAttribute('data-aos', 'zoom-in');
 
     //the VA's picture, wrapped in a link
     let vaImageAnchor = document.createElement("a");
@@ -322,6 +323,7 @@ function vaQuery(input, number, romaji) {
     let card = document.createElement("div");
     card.classList.add("card");
     card.classList.add("m-3");
+    card.setAttribute('data-aos', 'zoom-in');
 
     //the card's head
     let cardHead = document.createElement("div");

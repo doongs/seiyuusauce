@@ -565,10 +565,24 @@ function reset() {
   window.location.reload();
 }
 
+function urlQuery() {
+  let urlString = window.location.href;
+  let paramString = urlString.split("?")[1];
+  let queryString = new URLSearchParams(paramString);
+
+  for (let pair of queryString.entries()) {
+    if (pair[0] == "search") {
+      characterQuery(pair[1], 24, false);
+    }
+  }
+}
+
 (function () {
   if (!(localStorage.getItem("username") === null)) {
     userQuery(localStorage.getItem("username"));
-    document.querySelector(`#top`).innerHTML = `<div class="btn btn-red p-3 m-5" style="text-align: center;">Picking Up Where You Last Left Off...</div>`;
+    document.querySelector(
+      `#top`
+    ).innerHTML = `<div class="btn btn-red p-3 m-5" style="text-align: center;">Picking Up Where You Last Left Off...</div>`;
     setTimeout(function () {
       if (!(localStorage.getItem("va") === null)) {
         vaQuery(
@@ -576,19 +590,10 @@ function reset() {
           localStorage.getItem("number"),
           localStorage.getItem("romaji")
         );
+        urlQuery();
       }
     }, 2000);
-  }
-
-  let urlString = window.location.href;
-  let paramString = urlString.split("?")[1];
-  let queryString = new URLSearchParams(paramString);
-
-  for (let pair of queryString.entries()) {
-    console.log("Key is: " + pair[0]);
-    if (pair[0] == "search") {
-      console.log("Value is: " + pair[1]);
-      characterQuery(pair[1], 24, false);
-    }
+  } else {
+    urlQuery();
   }
 })();

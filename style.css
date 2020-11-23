@@ -1,6 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=IBM+Plex+Sans:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic);
 :root {
-  --imperial-red: #e63946;
+  --imperial-red: #A31420;
+  --imperial-red-light: #e63946;
   --honeydew: #f1faee;
   --powder-blue: #a8dadc;
   --celadon-blue: #457b9d;

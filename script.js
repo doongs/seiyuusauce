@@ -474,6 +474,7 @@ function userQuery(input) {
 }
 
 function userListQuery(input) {
+  console.log("listQuery");
   var query = `
   query ($id: Int) { 
     MediaListCollection(userId: $id, type: ANIME) {
@@ -539,7 +540,6 @@ function userListQuery(input) {
 
   //add all the characters from the user's show list into the userCharacters array
   function compileUserMedia(data) {
-    //reset the array
     userCharacters = [];
     let list = [];
     for (let i = 0; i < data.data.MediaListCollection.lists.length; i++) {
@@ -565,17 +565,19 @@ function reset() {
   window.location.reload();
 }
 
-
-(async function () {
+(function () {
   if (!(localStorage.getItem("username") === null)) {
-    await userQuery(localStorage.getItem("username"));
-  }
-  if (!(localStorage.getItem("va") === null)) {
-    await vaQuery(
-      localStorage.getItem("va"),
-      localStorage.getItem("number"),
-      localStorage.getItem("romaji")
-    );
+    userQuery(localStorage.getItem("username"));
+    document.querySelector(`#top`).innerHTML = `<div class="btn btn-red p-3 m-5" style="text-align: center;">Picking Up Where You Last Left Off...</div>`;
+    setTimeout(function () {
+      if (!(localStorage.getItem("va") === null)) {
+        vaQuery(
+          localStorage.getItem("va"),
+          localStorage.getItem("number"),
+          localStorage.getItem("romaji")
+        );
+      }
+    }, 2000);
   }
 
   let urlString = window.location.href;
@@ -586,7 +588,7 @@ function reset() {
     console.log("Key is: " + pair[0]);
     if (pair[0] == "search") {
       console.log("Value is: " + pair[1]);
-      await characterQuery(pair[1], 24, false);
+      characterQuery(pair[1], 24, false);
     }
   }
 })();

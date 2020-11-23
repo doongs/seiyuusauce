@@ -584,7 +584,8 @@ function reset() {
   for (let pair of queryString.entries()) {
     console.log("Key is: " + pair[0]);
     if (pair[0] == "search") {
-      characterQuery(pair[1]);
+      console.log("Value is: " + pair[1]);
+      characterQuery(pair[1], 24, false);
     }
   }
 })();

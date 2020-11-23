@@ -576,12 +576,19 @@ function reset() {
       localStorage.getItem("romaji")
     );
   }
+
   let urlString = window.location.href;
   let paramString = urlString.split("?")[1];
   let queryString = new URLSearchParams(paramString);
 
+  if(queryString.entries()[0] != undefined) {
+    console.log(queryString.entries()[0]);
+    characterQuery(queryString.entries()[0]);
+  }
+  /*
   for (let pair of queryString.entries()) {
     console.log("Key is: " + pair[0]);
     console.log("Value is: " + pair[1]);
   }
+  */
 })();

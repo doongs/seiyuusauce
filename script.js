@@ -565,12 +565,13 @@ function reset() {
   window.location.reload();
 }
 
-(function () {
+
+(async function () {
   if (!(localStorage.getItem("username") === null)) {
-    userQuery(localStorage.getItem("username"));
+    await userQuery(localStorage.getItem("username"));
   }
   if (!(localStorage.getItem("va") === null)) {
-    vaQuery(
+    await vaQuery(
       localStorage.getItem("va"),
       localStorage.getItem("number"),
       localStorage.getItem("romaji")
@@ -585,7 +586,7 @@ function reset() {
     console.log("Key is: " + pair[0]);
     if (pair[0] == "search") {
       console.log("Value is: " + pair[1]);
-      characterQuery(pair[1], 24, false);
+      await characterQuery(pair[1], 24, false);
     }
   }
 })();

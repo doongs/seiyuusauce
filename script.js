@@ -266,7 +266,7 @@ function vaQuery(input, number, romaji) {
     //the VA card
     let card = document.createElement("div");
     card.classList.add("card", "mr-5", "ml-5", "border", "border-secondary");
-    card.setAttribute('data-aos', 'zoom-in');
+    card.setAttribute("data-aos", "zoom-in");
 
     //the VA's picture, wrapped in a link
     let vaImageAnchor = document.createElement("a");
@@ -323,7 +323,7 @@ function vaQuery(input, number, romaji) {
     let card = document.createElement("div");
     card.classList.add("card");
     card.classList.add("m-3");
-    card.setAttribute('data-aos', 'zoom-in');
+    card.setAttribute("data-aos", "zoom-in");
 
     //the card's head
     let cardHead = document.createElement("div");
@@ -575,5 +575,12 @@ function reset() {
       localStorage.getItem("number"),
       localStorage.getItem("romaji")
     );
+  }
+  let paramString = urlString.split("?")[1];
+  let queryString = new URLSearchParams(paramString);
+
+  for (let pair of queryString.entries()) {
+    console.log("Key is: " + pair[0]);
+    console.log("Value is: " + pair[1]);
   }
 })();

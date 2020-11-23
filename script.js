@@ -581,7 +581,7 @@ function urlQuery() {
     userQuery(localStorage.getItem("username"));
     document.querySelector(
       `#top`
-    ).innerHTML = `<div class="btn btn-red p-3 m-5" style="text-align: center;">Picking Up Where You Last Left Off...</div>`;
+    ).innerHTML = `<div class="btn btn-red p-3 m-5" style="text-align: center;">Loading Data From Your Last Session...</div>`;
     setTimeout(function () {
       if (!(localStorage.getItem("va") === null) && !urlQuery()) {
         vaQuery(

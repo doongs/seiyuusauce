@@ -161,9 +161,6 @@ function vaQuery(input, number, romaji) {
     //cross reference the user list and va list
     if (userCharacters.length != 0) {
       intersectionUserList = [];
-      console.log(userCharacters);
-      console.log(staffCharacters);
-      console.log(staffCharacters.includes(1125));
       for (let i = 0; i < staffCharacters.length; i++) {
         //need to check against ID to prevent false flagging characters with the same name (36309 is the general Narrator id)
         if (
@@ -474,7 +471,6 @@ function userQuery(input) {
 }
 
 function userListQuery(input) {
-  console.log("listQuery");
   var query = `
   query ($id: Int) { 
     MediaListCollection(userId: $id, type: ANIME) {
@@ -569,12 +565,15 @@ function urlQuery() {
   let urlString = window.location.href;
   let paramString = urlString.split("?")[1];
   let queryString = new URLSearchParams(paramString);
+  let flag = false;
 
   for (let pair of queryString.entries()) {
     if (pair[0] == "search") {
       characterQuery(pair[1], 24, false);
+      flag = true;
     }
   }
+  return flag;
 }
 
 (function () {
@@ -584,13 +583,13 @@ function urlQuery() {
       `#top`
     ).innerHTML = `<div class="btn btn-red p-3 m-5" style="text-align: center;">Picking Up Where You Last Left Off...</div>`;
     setTimeout(function () {
-      if (!(localStorage.getItem("va") === null)) {
+      if (!(localStorage.getItem("va") === null) && !urlQuery()) {
         vaQuery(
           localStorage.getItem("va"),
           localStorage.getItem("number"),
           localStorage.getItem("romaji")
         );
-        urlQuery();
+        
       }
     }, 2000);
   } else {

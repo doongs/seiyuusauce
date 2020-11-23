@@ -576,7 +576,7 @@ function reset() {
       localStorage.getItem("romaji")
     );
   }
-  urlString = window.location.href;
+  let urlString = window.location.href;
   let paramString = urlString.split("?")[1];
   let queryString = new URLSearchParams(paramString);
 

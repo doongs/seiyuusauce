@@ -42,6 +42,8 @@ The Page Isn't Showing All of The Shows/Characters:
 - Try scrolling down, the cards will fade in 
 
 ### Future Feature Wishlist
+Contributions are welcome! Feel free to submit a pull request or fork the repository!
+
 - Reimplement queries to allow for display of more than 25 characters
 
 - Visualization of how many characters of a voice actor a user has in their AniList

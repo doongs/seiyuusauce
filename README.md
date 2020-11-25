@@ -1,9 +1,6 @@
 # Seiyuu Sauce
 A [website](https://doongs.github.io/va-search/) allowing anime fans to quickly see the characters that a voice actor has voiced.
 *Using the AniList GraphQL API.*
-
-### Seiyuu Sauce? What does that mean?
-
 <dl>
   <dt>Seiyuu</dt>
   <dd>The Japanese term for a voice actor in an anime</dd>

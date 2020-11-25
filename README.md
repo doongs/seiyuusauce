@@ -39,7 +39,7 @@ The last voice actor query, and last user list import will be saved to the brows
 - If a user list is saved, it will take a second to load in
 
 ### Custom URLs
-Append ?=search{name} to the site URL to make a character or voice actor query upon page load (useful for sharing links). 
+The site URL will be modified with ?search={name} upon a successful search. This custom URL can be copied and shared by clicking on the share button, or just by copying the current URL.
 - If a userlist is cached, then the URL based query *will* cross-reference.
 
 - Example: https://seiyuusauce.com/?search=Kana%20Hanazawa

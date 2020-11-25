@@ -2,7 +2,6 @@
 A [website](https://doongs.github.io/va-search/) allowing anime fans to quickly see the characters that a voice actor has voiced.
 *Using the AniList GraphQL API.*
 
----
 ### Seiyuu Sauce? What does that mean?
 
 <dl>
@@ -11,6 +10,7 @@ A [website](https://doongs.github.io/va-search/) allowing anime fans to quickly 
   <dt>Sauce</dt>
   <dd>Internet slang for the word <em>source</em> ("Send me that picture's sauce!")</dd>
 </dl>
+
 ---
 
 ### Basic Usage

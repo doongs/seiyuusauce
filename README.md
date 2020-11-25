@@ -7,6 +7,7 @@ The search menu allows for voice actor lookup via a character name or voice acto
 A character query is first sent, and if that fails, a va query is sent. 
 - Partial names can be used; however, in the case of matching names, first and last name will provide the best results. 
 - Japanese name ordering (Last Name, First Name) is not required.
+- Results are ordered by the character's popularity metric on AniList
 
 ![Screenshot of a basic voice actor search for Kana Hanazawa](basicExample.PNG)
 Click on the various card elements to open the AniList page for the respective element.
@@ -43,6 +44,7 @@ The Page Isn't Showing All of The Shows/Characters:
 - Try scrolling down, the cards will fade in 
 
 ### Future Feature Wishlist
+
 Contributions are welcome! Feel free to submit a pull request or fork the repository!
 
 - Reimplement queries to allow for display of more than 25 characters

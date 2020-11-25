@@ -1,6 +1,7 @@
 # Seiyuu Sauce
 A [website](https://doongs.github.io/va-search/) allowing anime fans to quickly see the characters that a voice actor has voiced.
 *Using the AniList GraphQL API.*
+
 ---
 ### Seiyuu Sauce? What does that mean?
 
@@ -11,6 +12,7 @@ A [website](https://doongs.github.io/va-search/) allowing anime fans to quickly 
   <dd>Internet slang for the word <em>source</em> ("Send me that picture's sauce!")</dd>
 </dl>
 ---
+
 ### Basic Usage
 The search menu allows for voice actor lookup via a character name or voice actor name. 
 A character query is first sent, and if that fails, a voice actor query is sent. 

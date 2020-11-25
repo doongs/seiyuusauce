@@ -26,6 +26,7 @@
         <div class="container d-flex justify-content-end">
           <button type="button" class="btn btn-red mr-4" data-toggle="modal" data-target="#importModal">Import Anilist</button>
           <button type="button" class="btn btn-red mr-4" data-toggle="modal" data-target="#searchModal">Search</button>
+          <button type="button" class="btn btn-red mr-4" data-toggle="modal" data-target="#shareModal">Share</button>
           <button type="button" class="btn btn-red mr-4" onClick="reset()">Reset</button>
           <button type="button" class="btn btn-red mr-4" onclick="window.open('https://github.com/doongs/va-search','resizable=yes')"><i class="fa fa-github"></i></button>  
         </div>
@@ -110,6 +111,20 @@
             <button type="submit" class="btn btn-blue" onclick="characterQuery(document.querySelector('#searchBox').value, document.querySelector('#numberBox').value, document.querySelector('#romajiCheckbox').checked); ">Search</button>
           </div>
         </div>
+      </div>
+    </div>
+    
+    <div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content col-12">
+              <div class="modal-header">
+                  <h5 class="modal-title">Share Link</h5> 
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span> </button>
+              </div>
+              <div class="modal-body"> 
+                  <div class="d-flex justify-content-between"> <input type="url" class="form-control" id="shareURL"> <button class="btn btn-red" id="copy" data-animation="true" data-toggle="tooltip" title="Copied!" onclick="share()"><i class="fa fa-clone"></i></button></div>
+              </div>
+          </div>
       </div>
     </div>
 

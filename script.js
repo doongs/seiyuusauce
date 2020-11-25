@@ -3,6 +3,7 @@ let userCharacters = [];
 let staffCharacters = [];
 let intersectionUserList = [];
 let login = false;
+let staffName = "";
 function characterQuery(input, number, romaji) {
   var query = `
   query ($search: String) {
@@ -249,6 +250,14 @@ function vaQuery(input, number, romaji) {
   //add all the characters from this VA to the global staffChracters[]
   function compileStaffMedia(staff) {
     //empty the array
+    document.querySelector("#shareURL").value = decodeURI(
+      `https://seiyuusauce.com/?search=${staff.name.full}`
+    );
+    window.history.replaceState(
+      undefined,
+      "Seiyuu Sauce",
+      decodeURI(`https://seiyuusauce.com/?search=?search=${staff.name.full}`)
+    );
     staffCharacters = [];
     for (let i = 0; i < staff.characters.edges.length; i++) {
       staffCharacters.push([
@@ -576,6 +585,19 @@ function urlQuery() {
   return flag;
 }
 
+function share() {
+  let text = document.querySelector("#shareURL");
+  text.select();
+  text.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  $("#copy").tooltip("enable");
+  $("#copy").tooltip("show");
+  setTimeout(function () {
+    $("#copy").tooltip("hide");
+    $("#copy").tooltip("disable");
+  }, 1000);
+}
+
 (function () {
   if (!(localStorage.getItem("username") === null)) {
     userQuery(localStorage.getItem("username"));
@@ -589,7 +611,6 @@ function urlQuery() {
           localStorage.getItem("number"),
           localStorage.getItem("romaji")
         );
-        
       }
     }, 2000);
   } else {

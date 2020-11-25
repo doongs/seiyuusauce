@@ -20,7 +20,8 @@ Romaji Names:
 ### Cross-Refrencing Your AniList
 The import menu allows for any user's AniList to be imported into the site. 
 After the AniList has been imported, voice actor/character searches will first display characters from shows the user has seen before shows that have not been seen.
-These will be shown with a blue border, as opposed to the default red border.
+- These will be shown with a blue border, as opposed to the default red border.
+
 ![Screenshot of a cross-referenced voice actor search for Kana Hanazawa](listExample.PNG)
 - Authentication is *not* required, so *any* user's account can be imported
 

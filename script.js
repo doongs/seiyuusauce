@@ -178,7 +178,7 @@ function vaQuery(input, number, romaji) {
     //the if checks to make sure the VA has the given number of roles
     //edges[3] == undefined means that the va only has 2 roles
     if (number == 0) {
-      number = 4;
+      number = 25;
     }
     //array for tracking how many and which characters have been added so far
     let addedCharacters = [];

@@ -1,5 +1,5 @@
 # Seiyuu Sauce
-A [website](https://doongs.github.io/va-search/) allowing anime fans to quickly see the characters that a voice actor has voiced.
+A [website](https://seiyuusauce.com/) allowing anime fans to quickly see the characters that a voice actor has voiced.
 *Using the AniList GraphQL API.*
 <dl>
   <dt>Seiyuu</dt>
@@ -42,7 +42,7 @@ The last voice actor query, and last user list import will be saved to the brows
 Append ?=search{name} to the site URL to make a character or voice actor query upon page load (useful for sharing links). 
 - If a userlist is cached, then the URL based query *will* cross-reference.
 
-- Example: https://doongs.github.io/va-search/?search=Kana%20Hanazawa
+- Example: https://seiyuusauce.com/?search=Kana%20Hanazawa
 ---
 ### Common Issues
 Voice Actor/Character Query Keeps Failing Desipte Correct Name:

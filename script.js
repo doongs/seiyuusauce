@@ -249,7 +249,6 @@ function vaQuery(input, number, romaji) {
 
   //add all the characters from this VA to the global staffChracters[]
   function compileStaffMedia(staff) {
-    //empty the array
     window.history.replaceState(
       undefined,
       "Seiyuu Sauce",
@@ -564,6 +563,12 @@ function userListQuery(input) {
 }
 
 function reset() {
+  window.history.replaceState(
+    undefined,
+    "Seiyuu Sauce",
+    decodeURI(`https://seiyuusauce.com/`)
+  );
+  document.querySelector("#shareURL").value = window.location.href;
   localStorage.clear();
   window.location.reload();
 }

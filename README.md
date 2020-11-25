@@ -32,7 +32,7 @@ The last voice actor query, and last user list import will be saved to the brows
 
 ### Custom URLs
 Append ?=search{name} to the site URL to make a character or voice actor query upon page load (useful for sharing links). 
-- If a userlist is cached, then the URL based character query *will* cross-reference.
+- If a userlist is cached, then the URL based query *will* cross-reference.
 
 - Example: https://doongs.github.io/va-search/?search=Kana%20Hanazawa
 ---

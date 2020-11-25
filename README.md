@@ -49,7 +49,7 @@ Voice Actor/Character Query Keeps Failing Desipte Correct Name:
 - Romanized Japanese names do not have consistent spelling, check for letters such as *u* or *o* (Nao Toyama vs Nao To**u**yama)
 
 The Page Isn't Showing All of The Shows/Characters:
-- Try scrolling down, the cards will fade in \
+- Try scrolling down, the cards will fade in 
 
 A Show is Not Shown With The Proper Blue Border for 'Seen'
 - Getting a userlist from the browser cache is based on a setTimeout function which results in JS timing issues when loading extremely long userlists

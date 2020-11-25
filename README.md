@@ -1,10 +1,19 @@
-# You've Heard Them Before
+# Seiyuu Sauce
 A [website](https://doongs.github.io/va-search/) allowing anime fans to quickly see the characters that a voice actor has voiced.
 *Using the AniList GraphQL API.*
 ---
+### Seiyuu Sauce? What does that mean?
+
+<dl>
+  <dt>Seiyuu</dt>
+  <dd>The Japanese term for a voice actor in an anime</dd>
+  <dt>Sauce</dt>
+  <dd>Internet slang for the word <em>source</em> ("Send me that picture's sauce!")</dd>
+</dl>
+
 ### Basic Usage
 The search menu allows for voice actor lookup via a character name or voice actor name. 
-A character query is first sent, and if that fails, a va query is sent. 
+A character query is first sent, and if that fails, a voice actor query is sent. 
 - Partial names can be used; however, in the case of matching names, first and last name will provide the best results. 
 - Japanese name ordering (Last Name, First Name) is not required.
 - Results are ordered by the character's popularity metric on AniList
@@ -14,7 +23,7 @@ Click on the various card elements to open the AniList page for the respective e
 ### Options
 Shows to List:
 - Specifies the maximum number of shows/characters do display from the voice actor 
-- Defaults to 4, limited to 25 due to Anilist's API Pagination
+- Defaults to 25, which is the maximum due to Anilist's API Pagination
 
 Romaji Names:
 - Specifies if the show and character names are displayed in their English translated form, or their romanized English form

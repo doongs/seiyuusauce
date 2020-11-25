@@ -6,7 +6,7 @@ A [website](https://doongs.github.io/va-search/) allowing anime fans to quickly 
 The search menu allows for voice actor lookup via a character name or voice actor name. 
 A character query is first sent, and if that fails, a va query is sent. 
 - Partial names can be used; however, in the case of matching names, first and last name will provide the best results. 
-- JP name ordering is not required.
+- Japanese name ordering (Last Name, First Name) is not required.
 
 ![Screenshot of a basic voice actor search for Kana Hanazawa](basicExample.PNG)
 Click on the various card elements to open the AniList page for the respective element.

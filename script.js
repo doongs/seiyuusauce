@@ -250,14 +250,12 @@ function vaQuery(input, number, romaji) {
   //add all the characters from this VA to the global staffChracters[]
   function compileStaffMedia(staff) {
     //empty the array
-    document.querySelector("#shareURL").value = decodeURI(
-      `https://seiyuusauce.com/?search=${staff.name.full}`
-    );
     window.history.replaceState(
       undefined,
       "Seiyuu Sauce",
-      decodeURI(`https://seiyuusauce.com/?search=?search=${staff.name.full}`)
+      decodeURI(`https://seiyuusauce.com/?search=${staff.name.full}`)
     );
+    document.querySelector("#shareURL").value = window.location.href;
     staffCharacters = [];
     for (let i = 0; i < staff.characters.edges.length; i++) {
       staffCharacters.push([

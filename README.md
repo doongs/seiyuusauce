@@ -1,7 +1,6 @@
 # You've Heard Them Before
----
-###A [website](https://doongs.github.io/va-search/) allowing anime fans to quickly see the characters that a voice actor has voiced.
-###*Using the AniList GraphQL API.*
+A [website](https://doongs.github.io/va-search/) allowing anime fans to quickly see the characters that a voice actor has voiced.
+*Using the AniList GraphQL API.*
 ---
 ### Basic Usage
 The search menu allows for voice actor lookup via a character name or voice actor name. 

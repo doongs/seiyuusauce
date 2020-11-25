@@ -1,5 +1,5 @@
 # Seiyuu Sauce
-A [website](https://doongs.github.io/va-search/) allowing anime fans to quickly see the characters that a voice actor has voiced.
+A [website](https://seiyuusauce.com/) allowing anime fans to quickly see the characters that a voice actor has voiced.
 *Using the AniList GraphQL API.*
 <dl>
   <dt>Seiyuu</dt>
@@ -39,10 +39,10 @@ The last voice actor query, and last user list import will be saved to the brows
 - If a user list is saved, it will take a second to load in
 
 ### Custom URLs
-Append ?=search{name} to the site URL to make a character or voice actor query upon page load (useful for sharing links). 
+The site URL will be modified with ?search={name} upon a successful search. This custom URL can be copied and shared by clicking on the share button, or just by copying the current URL.
 - If a userlist is cached, then the URL based query *will* cross-reference.
 
-- Example: https://doongs.github.io/va-search/?search=Kana%20Hanazawa
+- Example: https://seiyuusauce.com/?search=Kana%20Hanazawa
 ---
 ### Common Issues
 Voice Actor/Character Query Keeps Failing Desipte Correct Name:
@@ -50,6 +50,10 @@ Voice Actor/Character Query Keeps Failing Desipte Correct Name:
 
 The Page Isn't Showing All of The Shows/Characters:
 - Try scrolling down, the cards will fade in 
+
+A Show is Not Shown With The Proper Blue Border for 'Seen'
+- Getting a userlist from the browser cache is based on a setTimeout function which results in JS timing issues when loading extremely long userlists
+- Reset the page, reimport the AniList, and perform the search again 
 
 ### Future Feature Wishlist
 

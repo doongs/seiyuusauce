@@ -279,6 +279,7 @@ function vaQuery(input, number, romaji) {
     vaImage.classList.add("card-img");
     vaImage.id = staff.name.full.replace(/\s+/g, "");
     vaImage.src = staff.image.large;
+    vaImage.alt = staff.name.full;
 
     //add the VA picture to the link
     vaImageAnchor.appendChild(vaImage);
@@ -349,6 +350,7 @@ function vaQuery(input, number, romaji) {
     let characterImage = document.createElement("img");
     characterImage.classList.add("card-img");
     characterImage.src = character.node.image.large;
+    characterImage.alt = character.node.name.full;
 
     //add the character's picture to the link
     characterAnchor.appendChild(characterImage);
@@ -385,6 +387,7 @@ function vaQuery(input, number, romaji) {
     } else {
       animeName.textContent = character.media[0].title.romaji;
     }
+    animeImage.alt = animeName.textContent;
 
     //add the anime's name to the link
     animeNameAnchor.appendChild(animeName);

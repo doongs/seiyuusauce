@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=IBM+Plex+Sans:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic);
 :root {
-  --imperial-red: #A31420;
+  --imperial-red: #a31420;
   --imperial-red-light: #e63946;
   --honeydew: #f1faee;
   --powder-blue: #a8dadc;
@@ -67,7 +67,7 @@ body {
   max-width: 400px;
 }
 
-#searchBox {
+#search-box {
   font-family: FontAwesome, "IBM Plex Sans";
 }
 

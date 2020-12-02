@@ -30,10 +30,11 @@
             ><img
               id="profile-picture"
               alt="AniList Profile Picture"
+              aria-label="AniList Profile Picture"
               src="logo.png"
           /></a>
           <a href="https://anilist.co/" id="profile-name-link" target="_blank"
-            ><p class="mr-4" id="profile-name">AniList</p></a
+            ><p class="mr-4" aria-label="Anilist Username" id="profile-name">AniList</p></a
           >
         </div>
         <div class="container d-flex justify-content-end">
@@ -41,6 +42,7 @@
             type="button"
             class="btn btn-red mr-4"
             data-toggle="modal"
+            aria-label="Anilist Import"
             data-target="#importModal"
           >
             Anilist
@@ -49,6 +51,7 @@
             type="button"
             class="btn btn-red mr-4"
             data-toggle="modal"
+            aria-label="Search"
             data-target="#searchModal"
           >
             Search
@@ -57,11 +60,12 @@
             type="button"
             class="btn btn-red mr-4"
             data-toggle="modal"
+            aria-label="Share Link"
             data-target="#shareModal"
           >
             Share
           </button>
-          <button type="button" class="btn btn-red mr-4" onClick="reset()">
+          <button type="button" class="btn btn-red mr-4" onClick="reset()" aria-label="Reset the Page">
             Reset
           </button>
           <button
@@ -131,6 +135,7 @@
             <button
               type="button"
               class="btn btn-blue"
+              aria-label="Import"
               onclick="userQuery(document.querySelector('#importBox').value)"
             >
               Import
@@ -169,7 +174,7 @@
                     type="text"
                     aria-label="Character or Voice Actor Name"
                     class="form-control fa"
-                    id="searchBox"
+                    id="search-box"
                     placeholder="&#xF002;&nbsp;Character or VA Name"
                   />
                 </div>

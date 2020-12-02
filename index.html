@@ -34,7 +34,9 @@
               src="logo.png"
           /></a>
           <a href="https://anilist.co/" id="profile-name-link" target="_blank"
-            ><p class="mr-4" aria-label="Anilist Username" id="profile-name">AniList</p></a
+            ><p class="mr-4" aria-label="Anilist Username" id="profile-name">
+              AniList
+            </p></a
           >
         </div>
         <div class="container d-flex justify-content-end">
@@ -65,7 +67,12 @@
           >
             Share
           </button>
-          <button type="button" class="btn btn-red mr-4" onClick="reset()" aria-label="Reset the Page">
+          <button
+            type="button"
+            class="btn btn-red mr-4"
+            onClick="reset()"
+            aria-label="Reset the Page"
+          >
             Reset
           </button>
           <button
@@ -183,7 +190,7 @@
                     type="number"
                     aria-label="Number of shows to list"
                     class="form-control"
-                    id="numberBox"
+                    id="number-box"
                     placeholder="# Shows to List (Default 25, Max 25)"
                   />
                 </div>
@@ -192,7 +199,7 @@
                     <input
                       class="form-check-input"
                       type="checkbox"
-                      id="romajiCheckbox"
+                      id="romaji-checkbox"
                     />
                     <label class="form-check-label" for="romajiCheckbox">
                       Romaji Names
@@ -218,7 +225,7 @@
             <button
               type="submit"
               class="btn btn-blue"
-              onclick="characterQuery(document.querySelector('#searchBox').value, document.querySelector('#numberBox').value, document.querySelector('#romajiCheckbox').checked); "
+              onclick="characterQuery(document.querySelector('#search-box').value, document.querySelector('#number-box').value, document.querySelector('#romaji-checkbox').checked); "
             >
               Search
             </button>

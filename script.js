@@ -147,7 +147,7 @@ function vaQuery(input, number, romaji) {
   }
 
   function handleData(data) {
-    console.log(`${data.data.Staff.name.full}:`, data.data);
+    console.log(`${data.data.Staff.name.full}:`, data.data.Staff);
     localStorage.setItem("va", input);
     localStorage.setItem("number", number);
     localStorage.setItem("romaji", romaji);
@@ -263,6 +263,7 @@ function vaQuery(input, number, romaji) {
         staff.characters.edges[i].node.name.full,
       ]);
     }
+    console.log(`${staff.name.full}'s Characters:`, staffCharacters);
   }
 
   //create the VA Card HTML
@@ -541,7 +542,7 @@ function userListQuery(input) {
 
   // Use the data recieved
   function handleData(data) {
-    console.log("User Lists:", data.data);
+    console.log("User Lists:", data.data.MediaListCollection);
     compileUserMedia(data);
   }
 
@@ -558,6 +559,7 @@ function userListQuery(input) {
         userCharacters.push(list[i].media.characters.edges[j].node.id);
       }
     }
+    console.log("User's Characters:", userCharacters);
   }
 
   // On Error

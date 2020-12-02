@@ -556,7 +556,7 @@ function userListQuery(input) {
     //let list = data.data.MediaListCollection.lists[2];
     for (let i = 0; i < list.length; i++) {
       for (let j = 0; j < list[i].media.characters.edges.length; j++) {
-        userCharacters.push(list[i].media.characters.edges[j].node.id, list[i].media.characters.edges[j].node.name.full,);
+        userCharacters.push([list[i].media.characters.edges[j].node.id, list[i].media.characters.edges[j].node.name.full]);
       }
     }
     console.log("User's Characters:", userCharacters);

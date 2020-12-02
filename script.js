@@ -147,7 +147,7 @@ function vaQuery(input, number, romaji) {
   }
 
   function handleData(data) {
-    console.dir(data.data.Staff.name.full, data.data);
+    console.log(`${data.data.Staff.name.full}:`, data.data);
     localStorage.setItem("va", input);
     localStorage.setItem("number", number);
     localStorage.setItem("romaji", romaji);
@@ -541,7 +541,7 @@ function userListQuery(input) {
 
   // Use the data recieved
   function handleData(data) {
-    console.dir("User Lists", data.data);
+    console.log("User Lists:", data.data);
     compileUserMedia(data);
   }
 

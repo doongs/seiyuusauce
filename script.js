@@ -549,7 +549,7 @@ function userListQuery(input) {
   //add all the characters from the user's show list into the userCharacters array
   function compileUserMedia(data) {
     userCharacters = [];
-    tempCharacters = [];
+    let tempCharacters = [];
     let list = [];
     for (let i = 0; i < data.data.MediaListCollection.lists.length; i++) {
       list = list.concat(data.data.MediaListCollection.lists[i].entries);

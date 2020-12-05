@@ -544,7 +544,7 @@ function userListQuery(input) {
 
   // Use the data recieved
   function handleData(data) {
-    console.log(`%c User Lists::`, 'background: #FFFFFF; color: #000000');
+    console.log(`%c User Lists:`, 'background: #FFFFFF; color: #000000');
     console.dir(data.data.MediaListCollection);
     compileUserMedia(data);
   }

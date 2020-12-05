@@ -147,7 +147,8 @@ function vaQuery(input, number, romaji) {
   }
 
   function handleData(data) {
-    console.log(`${data.data.Staff.name.full}:`, data.data.Staff);
+    console.log(`%c ${data.data.Staff.name.full}: `, 'background: #FFFFFF; color: #000000');
+    console.dir(data.data.Staff);
     localStorage.setItem("va", input);
     localStorage.setItem("number", number);
     localStorage.setItem("romaji", romaji);
@@ -263,7 +264,8 @@ function vaQuery(input, number, romaji) {
         staff.characters.edges[i].node.name.full,
       ]);
     }
-    console.log(`${staff.name.full}'s Characters:`, staffCharacters);
+    console.log(`%c ${staff.name.full}'s Characters:`, 'background: #FFFFFF; color: #000000');
+    console.dir(staffCharacters);
   }
 
   //create the VA Card HTML
@@ -542,7 +544,8 @@ function userListQuery(input) {
 
   // Use the data recieved
   function handleData(data) {
-    console.log("User Lists:", data.data.MediaListCollection);
+    console.log(`%c User Lists::`, 'background: #FFFFFF; color: #000000');
+    console.dir(data.data.MediaListCollection);
     compileUserMedia(data);
   }
 
@@ -561,7 +564,8 @@ function userListQuery(input) {
         tempCharacters.push([list[i].media.characters.edges[j].node.id, list[i].media.characters.edges[j].node.name.full]);
       }
     }
-    console.log("User's Characters:", tempCharacters);
+    console.log(`%c User's Characters:`, 'background: #FFFFFF; color: #000000');
+    console.dir(tempCharacters);
   }
 
   // On Error

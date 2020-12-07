@@ -4,6 +4,8 @@ let staffCharacters = [];
 let intersectionUserList = [];
 let login = false;
 let staffName = "";
+
+//Query the Anilist API for a given character name
 function characterQuery(input, number, romaji) {
   var query = `
   query ($search: String) {
@@ -72,6 +74,8 @@ function characterQuery(input, number, romaji) {
     vaQuery(input, number, romaji);
   }
 }
+
+//Query the Anilist API for a given voice actor name
 function vaQuery(input, number, romaji) {
   var query = `
     query ($name: String) { # Define which variables will be used in the query (id)
@@ -147,7 +151,10 @@ function vaQuery(input, number, romaji) {
   }
 
   function handleData(data) {
-    console.log(`%c ${data.data.Staff.name.full}: `, 'background: #FFFFFF; color: #000000');
+    console.log(
+      `%c ${data.data.Staff.name.full}: `,
+      "background: #FFFFFF; color: #000000"
+    );
     console.dir(data.data.Staff);
     localStorage.setItem("va", input);
     localStorage.setItem("number", number);
@@ -264,7 +271,10 @@ function vaQuery(input, number, romaji) {
         staff.characters.edges[i].node.name.full,
       ]);
     }
-    console.log(`%c ${staff.name.full}'s Characters:`, 'background: #FFFFFF; color: #000000');
+    console.log(
+      `%c ${staff.name.full}'s Characters:`,
+      "background: #FFFFFF; color: #000000"
+    );
     console.dir(staffCharacters);
   }
 
@@ -413,6 +423,7 @@ function vaQuery(input, number, romaji) {
   }
 }
 
+//Query the Anilist API for a given username
 function userQuery(input) {
   var query = `
     query ($name: String) { 
@@ -483,6 +494,7 @@ function userQuery(input) {
   }
 }
 
+//Helper method for userQuery to get the user's list data after their ID has been recieved
 function userListQuery(input) {
   var query = `
   query ($id: Int) { 
@@ -544,7 +556,7 @@ function userListQuery(input) {
 
   // Use the data recieved
   function handleData(data) {
-    console.log(`%c User Lists:`, 'background: #FFFFFF; color: #000000');
+    console.log(`%c User Lists:`, "background: #FFFFFF; color: #000000");
     console.dir(data.data.MediaListCollection);
     compileUserMedia(data);
   }
@@ -561,10 +573,13 @@ function userListQuery(input) {
     for (let i = 0; i < list.length; i++) {
       for (let j = 0; j < list[i].media.characters.edges.length; j++) {
         userCharacters.push(list[i].media.characters.edges[j].node.id);
-        tempCharacters.push([list[i].media.characters.edges[j].node.id, list[i].media.characters.edges[j].node.name.full]);
+        tempCharacters.push([
+          list[i].media.characters.edges[j].node.id,
+          list[i].media.characters.edges[j].node.name.full,
+        ]);
       }
     }
-    console.log(`%c User's Characters:`, 'background: #FFFFFF; color: #000000');
+    console.log(`%c User's Characters:`, "background: #FFFFFF; color: #000000");
     console.dir(tempCharacters);
   }
 
@@ -576,22 +591,26 @@ function userListQuery(input) {
 }
 
 function reset() {
+  //Reset the window URL to base state
   window.history.replaceState(
     undefined,
     "Seiyuu Sauce",
     decodeURI(`https://seiyuusauce.com/`)
   );
+  //Reset the shareURL
   document.querySelector("#shareURL").value = window.location.href;
+  //Clear saved cookies
   localStorage.clear();
   window.location.reload();
 }
 
+//Perform a search based on the URL if there is a custom URL
 function urlQuery() {
   let urlString = window.location.href;
   let paramString = urlString.split("?")[1];
   let queryString = new URLSearchParams(paramString);
   let flag = false;
-
+  //Look for search keyword and then intiate the characterQuery process
   for (let pair of queryString.entries()) {
     if (pair[0] == "search") {
       characterQuery(pair[1], 24, false);
@@ -601,10 +620,12 @@ function urlQuery() {
   return flag;
 }
 
+//Update the shareModal input box with the URL
 function share() {
   let text = document.querySelector("#shareURL");
   text.select();
   text.setSelectionRange(0, 99999);
+  //Auto copy to user's clipboard when button is clicked
   document.execCommand("copy");
   $("#copy").tooltip("enable");
   $("#copy").tooltip("show");
@@ -615,11 +636,13 @@ function share() {
 }
 
 (function () {
+  //If cookies have been saved, then query for the saved user and saved search
   if (!(localStorage.getItem("username") === null)) {
     userQuery(localStorage.getItem("username"));
     document.querySelector(
       `#top`
     ).innerHTML = `<div class="btn btn-red p-3 m-5" style="text-align: center;">Loading Data From Your Last Session...</div>`;
+    //Use setTimeout to wait for the user's list to load and compile
     setTimeout(function () {
       if (!(localStorage.getItem("va") === null) && !urlQuery()) {
         vaQuery(

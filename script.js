@@ -611,7 +611,10 @@ function reset() {
 //Perform a search based on the URL if there is a custom URL
 function urlQuery() {
   let urlString = window.location.href;
-  let paramString = urlString.split("?")[2];
+  let paramString = urlString.split("?")[1];
+  if(urlString.split("?")[2] == "aos") {
+    aos = false;
+  }
   let queryString = new URLSearchParams(paramString);
   let flag = false;
   //Look for search keyword and then intiate the characterQuery process
@@ -619,9 +622,6 @@ function urlQuery() {
     if (pair[0] == "search") {
       characterQuery(pair[1], 24, false);
       flag = true;
-    }
-    if (pair[0] == "aos") {
-      aos = false;
     }
   }
   return flag;

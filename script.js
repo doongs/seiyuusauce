@@ -4,6 +4,7 @@ let staffCharacters = [];
 let intersectionUserList = [];
 let login = false;
 let staffName = "";
+let aos = true;
 
 //Query the Anilist API for a given character name
 function characterQuery(input, number, romaji) {
@@ -283,8 +284,9 @@ function vaQuery(input, number, romaji) {
     //the VA card
     let card = document.createElement("div");
     card.classList.add("card", "mr-5", "ml-5", "border", "border-secondary");
-    card.setAttribute("data-aos", "zoom-in");
-
+    if (aos) {
+      card.setAttribute("data-aos", "zoom-in");
+    }
     //the VA's picture, wrapped in a link
     let vaImageAnchor = document.createElement("a");
     vaImageAnchor.href = staff.siteUrl;
@@ -341,7 +343,9 @@ function vaQuery(input, number, romaji) {
     let card = document.createElement("div");
     card.classList.add("card");
     card.classList.add("m-3");
-    card.setAttribute("data-aos", "zoom-in");
+    if (aos) {
+      card.setAttribute("data-aos", "zoom-in");
+    }
 
     //the card's head
     let cardHead = document.createElement("div");
@@ -615,6 +619,9 @@ function urlQuery() {
     if (pair[0] == "search") {
       characterQuery(pair[1], 24, false);
       flag = true;
+    }
+    if (pair[2] == "aos") {
+      aos = false;
     }
   }
   return flag;

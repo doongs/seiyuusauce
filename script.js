@@ -600,7 +600,7 @@ function reset() {
     undefined,
     "Seiyuu Sauce",
     decodeURI(`https://seiyuusauce.com/`)
-  );
+  );``
   //Reset the shareURL
   document.querySelector("#shareURL").value = window.location.href;
   //Clear saved cookies
@@ -620,7 +620,7 @@ function urlQuery() {
       characterQuery(pair[1], 24, false);
       flag = true;
     }
-    if (pair[2] == "aos") {
+    if (pair[0] == "aos") {
       aos = false;
     }
   }

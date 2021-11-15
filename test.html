@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Gabriel Doon" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <title>Seiyuu Sauce</title>
+  </head>
+  <body>
+    <nav class="collapse navbar navbar-expand navbar-dark bg-dark d-flex fixed-top" id="nav">
+      <!-- Nav Left Profile Container -->
+      <div class="container d-flex justify-content-start">
+        <a href="https://anilist.co/" id="profile-picture-link" target="_blank"
+          ><img
+            id="profile-picture"
+            alt="AniList Profile Picture"
+            aria-label="AniList Profile Picture"
+            src="logo.png"
+        /></a>
+        <a href="https://anilist.co/" id="profile-name-link" target="_blank"
+          ><p class="mr-4" aria-label="Anilist Username" id="profile-name">
+            AniList
+          </p></a
+        >
+      </div>
+      <!-- Nav Right Button Container -->
+      <div class="container d-flex justify-content-end">
+        <button
+          type="button"
+          class="btn btn-red mr-4"
+          data-toggle="modal"
+          aria-label="Anilist Import"
+          data-target="#importModal"
+        >
+          Anilist
+        </button>
+        <button
+          type="button"
+          class="btn btn-red mr-4"
+          data-toggle="modal"
+          aria-label="Search"
+          data-target="#searchModal"
+        >
+          Search
+        </button>
+        <button
+          type="button"
+          class="btn btn-red mr-4"
+          data-toggle="modal"
+          aria-label="Share Link"
+          data-target="#shareModal"
+        >
+          Share
+        </button>
+        <button
+          type="button"
+          class="btn btn-red mr-4"
+          onClick="reset()"
+          aria-label="Reset the Page"
+        >
+          Reset
+        </button>
+        <button
+          type="button"
+          aria-label="Visit Github"
+          class="btn btn-red mr-4"
+          onclick="window.open('https://github.com/doongs/va-search','resizable=yes')"
+        >
+          <i class="fa fa-github"></i>
+        </button>
+        <button
+          type="button"
+          class="btn btn-red mr-4"
+          data-toggle="collapse"
+          data-target="#nav"
+        ></button>
+      </div>
+    </nav>
+  </body>
+</html>

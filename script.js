@@ -262,7 +262,7 @@ function vaQuery(input, number, romaji) {
     window.history.replaceState(
       undefined,
       "Seiyuu Sauce",
-      decodeURI(`https://seiyuusauce.com/?search=${staff.name.full}`)
+      decodeURI(`https://doongs.github.io/seiyuusauce/?search=${staff.name.full}`)
     );
     document.querySelector("#shareURL").value = window.location.href;
     staffCharacters = [];
@@ -599,7 +599,7 @@ function reset() {
   window.history.replaceState(
     undefined,
     "Seiyuu Sauce",
-    decodeURI(`https://seiyuusauce.com/`)
+    decodeURI(`https://doongs.github.io/seiyuusauce/`)
   );``
   //Reset the shareURL
   document.querySelector("#shareURL").value = window.location.href;
